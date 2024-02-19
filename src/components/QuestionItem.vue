@@ -168,7 +168,35 @@ function clearAnswer() {
 }
 
 function getAnswer() {
-    //TODO доделать
+    //TODO доделать customAnswer
+    const answer = answersStore.getAnswer(question.value.value.id)
+    if (question.value.value.questionType === 'single') {
+        selectedAnswer.value = answer[0] || ''
+    } else if (question.value.value.questionType === 'multiple') {
+        if (Array.isArray(answer)) {
+            selectedAnswers.value = answer.filter((ans) => ans !== 'customAnswer')
+            if (answer.includes('customAnswer')) {
+                customAnswerChecked.value = true
+            }
+        }
+    } else {
+        if (typeof answer === 'object' && !Array.isArray(answer)) {
+            selectedAnswer.value = 'customAnswer'
+            customAnswerChecked.value = true
+        } else {
+            openAnswer.value = answer || ''
+        }
+    }
+
+    if (question.value.value.allowCustomAnswer) {
+        if (
+            selectedAnswer.value === 'customAnswer' ||
+            selectedAnswers.value.includes('customAnswer')
+        ) {
+            customAnswer.value =
+                answer.find((ans) => typeof ans === 'object')?.['свой вариант'] || ''
+        }
+    }
 }
 </script>
 <style scoped>

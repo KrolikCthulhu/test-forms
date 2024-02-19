@@ -13,7 +13,7 @@ export const useAnswersStore = defineStore('answers', () => {
 
     function getAnswer(questionId) {
         if (this.answers && this.answers[questionId]) {
-            return this.answers[questionId].value
+            return this.answers[questionId]
         }
         return {}
     }

@@ -5,11 +5,6 @@
             <template #content>
                 <pre>{{ JSON.stringify(answers, null, 2) }}</pre>
             </template>
-            <template #footer>
-                <div>
-                    <Button @click="startSurvey">Начать опрос</Button>
-                </div>
-            </template>
         </Card>
     </div>
 </template>
